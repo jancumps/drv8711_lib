@@ -11,7 +11,7 @@ export namespace drv8711 {
 // you can change these before sending them to
 // the driver over SPI
 
-drv8711::CTRL reg_ctrl {
+drv8711::ctrl reg_ctrl {
     0x0003, // dtime
     0x0003, // isgain
     0x0000, // exstall
@@ -21,33 +21,33 @@ drv8711::CTRL reg_ctrl {
     0x0001  // enbl
 };
 
-drv8711::TORQUE reg_torque {
+drv8711::torque reg_torque {
     0x0000, // simplth
     0x00ba  // torque
 };
 
-drv8711::OFF reg_off{
+drv8711::off reg_off{
     0x0000, // pwmmode
     0x0030  // toff
 };
 
-drv8711::BLANK reg_blank {
+drv8711::blank reg_blank {
     0x0001, // abt
     0x0008  // tblank
 };
 
-drv8711::DECAY reg_decay {
+drv8711::decay reg_decay {
     0x0003, // decmod
     0x0010  // tdecay
 };
 
-drv8711::STALL reg_stall {
+drv8711::stall reg_stall {
     0x0003, // vdiv
     0x0003, // sdcnt
     0x0040  // sdthr
 };
 
-drv8711::DRIVE reg_drive {
+drv8711::drive reg_drive {
     0x0000, // idrivep
     0x0000, // idriven
     0x0001, // tdrivep
@@ -56,7 +56,7 @@ drv8711::DRIVE reg_drive {
     0x0001  // ocpth
 };
 
-drv8711::STATUS reg_status {
+drv8711::status reg_status {
     0x0000, // stdlat
     0x0000, // std
     0x0000, // uvlo
