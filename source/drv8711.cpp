@@ -5,7 +5,7 @@ module;
 export module drv8711;
 export namespace drv8711 {
 
-struct CTRL {
+struct ctrl {
                             // address 14-12
     unsigned int dtime;     // 11-10
     unsigned int isgain;    // 9-8
@@ -19,7 +19,7 @@ struct CTRL {
     }
 };
  
-struct TORQUE {
+struct torque {
                             // address 14-12
                             // 11
     unsigned int simplth;   // 10-8
@@ -29,7 +29,7 @@ struct TORQUE {
     }
 };
  
-struct OFF {
+struct off {
                             // address 14-12
                             // 11-9
     unsigned int pwmmode;   // 8
@@ -39,7 +39,7 @@ struct OFF {
     }
 };
  
-struct BLANK {
+struct blank {
                             // address 14-12
                             // 11-9
     unsigned int abt;       // 8
@@ -49,7 +49,7 @@ struct BLANK {
     }
 };
  
-struct DECAY {
+struct decay {
                             // address 14-12
                             // 11
     unsigned int decmod;    // 10-8
@@ -59,7 +59,7 @@ struct DECAY {
     }
 };
  
-struct STALL {
+struct stall {
                             // address 14-12
     unsigned int vdiv;      // 11-10
     unsigned int sdcnt;     // 9-8
@@ -69,7 +69,7 @@ struct STALL {
     }
 };
  
-struct DRIVE {
+struct drive {
                             // address 14-12
     unsigned int idrivep;   // 11-10
     unsigned int idriven;   // 9-8
@@ -82,7 +82,7 @@ struct DRIVE {
     }
 };
  
-struct STATUS {
+struct status {
                             // address 14-12
                             // 11-8
     unsigned int stdlat;    // 7
