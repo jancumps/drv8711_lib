@@ -105,7 +105,7 @@ public:
     virtual void init_spi() = 0;
     virtual void init_gpio() = 0;
     virtual void init_registers() = 0;
-    virtual bool microsteps(unsigned int) override {
+    virtual bool microsteps(unsigned int microsteps) override {
         bool success = true;
         switch (microsteps) {
         1: 
