@@ -102,6 +102,16 @@ struct status {
 
 class drv8711_driver : public stepper_driver::stepper_driver {
 public:
+    // changes config register settings
+    virtual bool microsteps(unsigned int microsteps) override {
+        uint16_t reg = read(0x0000);
+        reg &= 0b11111111111111111111111110000111; // clear microsteps
+        uint16_t mode = microsteps_mode(microsteps);
+        mode = mode << 3;
+        reg |= mode;
+        write(reg);
+        return true;
+        }
 protected:
     virtual unsigned int microsteps_mode(unsigned int microsteps) {
         unsigned int mode = true;
@@ -139,8 +149,9 @@ protected:
         return mode;
     }
 private:
-    virtual void write(uint16_t reg) = 0;
-    virtual void init_spi() = 0;
+virtual void write(uint16_t reg) = 0;
+virtual uint16_t read(uint16_t address) = 0;
+virtual void init_spi() = 0;
     virtual void init_gpio() = 0;
     virtual void init_registers() = 0;
 };
