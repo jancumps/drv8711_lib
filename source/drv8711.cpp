@@ -109,13 +109,13 @@ private:
     virtual void write(uint16_t reg) = 0;
 };
 
-class wakeup { // driver out of sleep as long as object in scope
+/* class wakeup { // driver out of sleep as long as object in scope
 public:    
     wakeup(drv8711_driver& driver) : driver_(driver) { driver.enable(true); }
     ~wakeup() { driver_.enable(false); }
 private:
     drv8711_driver& driver_;
 };
-
+ */
 
 } // namespace drv8711
