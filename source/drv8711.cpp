@@ -107,6 +107,41 @@ public:
     virtual void init_registers() = 0;
 private:
     virtual void write(uint16_t reg) = 0;
+    virtual unsigned int microsteps_mode(unsigned int microsteps) {
+        unsigned int mode = true;
+        switch (microsteps) {
+        case 1:
+            mode = 0x0000;
+            break;
+        case 2:
+            mode = 0x0001;
+            break;
+        case 4:
+            mode = 0x0002;
+            break;
+        case 8:
+            mode = 0x0003;
+            break;
+        case 16:
+            mode = 0x0004;
+            break;
+        case 32:
+            mode = 0x0005;
+            break;
+        case 64:
+            mode = 0x0006;
+            break;
+        case 128:
+            mode = 0x0007;
+            break;
+        case 256:
+            mode = 0x0008;
+            break;
+        default:
+            mode = 0x0000;
+        }
+        return mode;
+    }
 };
 
 /* class wakeup { // driver out of sleep as long as object in scope
