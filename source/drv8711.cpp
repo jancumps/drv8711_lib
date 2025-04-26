@@ -105,8 +105,7 @@ public:
     virtual void init_spi() = 0;
     virtual void init_gpio() = 0;
     virtual void init_registers() = 0;
-private:
-    virtual void write(uint16_t reg) = 0;
+protected:
     virtual unsigned int microsteps_mode(unsigned int microsteps) {
         unsigned int mode = true;
         switch (microsteps) {
@@ -142,6 +141,8 @@ private:
         }
         return mode;
     }
+private:
+    virtual void write(uint16_t reg) = 0;
 };
 
 /* class wakeup { // driver out of sleep as long as object in scope
