@@ -103,7 +103,7 @@ struct status {
 class drv8711_driver : public stepper_driver::stepper_driver {
 public:
     virtual bool microsteps(unsigned int microsteps) override {
-        uint16_t reg = read(0x0000);
+        uint16_t reg = read(ctrl::address);
         reg &= 0b00001111111111111111111110000111; // clear address (garbage) and microsteps
         uint16_t mode = microsteps_mode(microsteps);
         mode = mode << 3;
