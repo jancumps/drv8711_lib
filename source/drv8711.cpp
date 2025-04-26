@@ -3,7 +3,6 @@ module;
 #include <cstdint>
 
 import stepper_driver;
-import drv8711_config;
 
 export module drv8711;
 export namespace drv8711 {
@@ -106,45 +105,6 @@ public:
     virtual void init_spi() = 0;
     virtual void init_gpio() = 0;
     virtual void init_registers() = 0;
-    virtual bool microsteps(unsigned int microsteps) override {
-        bool success = true;
-        switch (microsteps) {
-        case 1: 
-            drv8711::reg_ctrl.mode = 0x0000;
-            break;
-        case 2: 
-            drv8711::reg_ctrl.mode = 0x0001;
-            break;
-        case 4: 
-            drv8711::reg_ctrl.mode = 0x0002;
-            break;
-        case 8: 
-            drv8711::reg_ctrl.mode = 0x0003;
-            break;
-        case 16: 
-            drv8711::reg_ctrl.mode = 0x0004;
-            break;
-        case 32: 
-            drv8711::reg_ctrl.mode = 0x0005;
-            break;
-        case 64: 
-            drv8711::reg_ctrl.mode = 0x0006;
-            break;
-        case 128:
-            drv8711::reg_ctrl.mode = 0x0007;
-            break;
-        case 256:
-            drv8711::reg_ctrl.mode = 0x0008;
-            break;
-        default:
-            success = false;
-        }
-        if (success) {
-            write(drv8711::reg_ctrl);
-        }
-        return success;
-    }
-
 private:
     virtual void write(uint16_t reg) = 0;
 };
