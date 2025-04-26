@@ -102,7 +102,6 @@ struct status {
 
 class driver : public stepper_driver::stepper_driver {
 public:
-    stepper_driver() {}
     virtual void init_spi() = 0;
     virtual void init_gpio() = 0;
     virtual void init_registers() = 0;
