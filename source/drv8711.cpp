@@ -1,7 +1,7 @@
 module;
 
 #include <cstdint>
-
+#include <cassert>
 import stepper_driver;
 
 export module drv8711;
