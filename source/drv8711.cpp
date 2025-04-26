@@ -2,6 +2,8 @@ module;
 
 #include <cstdint>
 
+import stepper_driver;
+
 export module drv8711;
 export namespace drv8711 {
 
@@ -98,11 +100,10 @@ struct status {
     }
 };
 
-class driver {
+class driver : public stepper_driver::stepper_driver {
 public:
     driver() {}
     virtual void write(uint16_t reg) = 0;
-    virtual void enable(bool enable) = 0;
     virtual void init_spi() = 0;
     virtual void init_gpio() = 0;
     virtual void init_registers() = 0;
