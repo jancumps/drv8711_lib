@@ -102,9 +102,6 @@ struct status {
 
 class drv8711_driver : public stepper_driver::stepper_driver {
 public:
-    virtual void init_spi() = 0;
-    virtual void init_gpio() = 0;
-    virtual void init_registers() = 0;
 protected:
     virtual unsigned int microsteps_mode(unsigned int microsteps) {
         unsigned int mode = true;
@@ -143,15 +140,9 @@ protected:
     }
 private:
     virtual void write(uint16_t reg) = 0;
+    virtual void init_spi() = 0;
+    virtual void init_gpio() = 0;
+    virtual void init_registers() = 0;
 };
-
-/* class wakeup { // driver out of sleep as long as object in scope
-public:    
-    wakeup(drv8711_driver& driver) : driver_(driver) { driver.enable(true); }
-    ~wakeup() { driver_.enable(false); }
-private:
-    drv8711_driver& driver_;
-};
- */
 
 } // namespace drv8711
