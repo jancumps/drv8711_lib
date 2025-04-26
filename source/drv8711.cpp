@@ -102,11 +102,49 @@ struct status {
 
 class driver : public stepper_driver::stepper_driver {
 public:
-    driver() {}
-    virtual void write(uint16_t reg) = 0;
+    stepper_driver() {}
     virtual void init_spi() = 0;
     virtual void init_gpio() = 0;
     virtual void init_registers() = 0;
+    virtual bool microsteps(uint microsteps) override {
+        bool success = true;
+        switch (microsteps) {
+        1: 
+            drv8711::reg_ctrl.mode = 0x0000;
+            break;
+        2: 
+            drv8711::reg_ctrl.mode = 0x0001;
+            break;
+        4: 
+            drv8711::reg_ctrl.mode = 0x0002;
+            break;
+        8: 
+            drv8711::reg_ctrl.mode = 0x0003;
+            break;
+        16: 
+            drv8711::reg_ctrl.mode = 0x0004;
+            break;
+        32: 
+            drv8711::reg_ctrl.mode = 0x0005;
+            break;
+        64: 
+            drv8711::reg_ctrl.mode = 0x0006;
+            break;
+        128:
+            drv8711::reg_ctrl.mode = 0x0007;
+            break;
+        256:
+            drv8711::reg_ctrl.mode = 0x0008;
+            break;
+        default:
+            success = false;
+        }
+        write(drv8711::reg_ctrl);
+        return success;
+    }
+
+private:
+    virtual void write(uint16_t reg) = 0;
 };
 
 class wakeup { // driver out of sleep as long as object in scope
