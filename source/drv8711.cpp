@@ -3,6 +3,7 @@ module;
 #include <cstdint>
 
 import stepper_driver;
+import drv8711_config;
 
 export module drv8711;
 export namespace drv8711 {
@@ -108,31 +109,31 @@ public:
     virtual bool microsteps(unsigned int microsteps) override {
         bool success = true;
         switch (microsteps) {
-        1: 
+        case 1: 
             drv8711::reg_ctrl.mode = 0x0000;
             break;
-        2: 
+        case 2: 
             drv8711::reg_ctrl.mode = 0x0001;
             break;
-        4: 
+        case 4: 
             drv8711::reg_ctrl.mode = 0x0002;
             break;
-        8: 
+        case 8: 
             drv8711::reg_ctrl.mode = 0x0003;
             break;
-        16: 
+        case 16: 
             drv8711::reg_ctrl.mode = 0x0004;
             break;
-        32: 
+        case 32: 
             drv8711::reg_ctrl.mode = 0x0005;
             break;
-        64: 
+        case 64: 
             drv8711::reg_ctrl.mode = 0x0006;
             break;
-        128:
+        case 128:
             drv8711::reg_ctrl.mode = 0x0007;
             break;
-        256:
+        case 256:
             drv8711::reg_ctrl.mode = 0x0008;
             break;
         default:
