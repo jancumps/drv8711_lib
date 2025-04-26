@@ -100,12 +100,12 @@ struct status {
     }
 };
 
-class driver : public stepper_driver::stepper_driver {
+class drv8711_driver : public stepper_driver::stepper_driver {
 public:
     virtual void init_spi() = 0;
     virtual void init_gpio() = 0;
     virtual void init_registers() = 0;
-    virtual bool microsteps(uint microsteps) override {
+    virtual bool microsteps(unisgned int) override {
         bool success = true;
         switch (microsteps) {
         1: 
@@ -138,7 +138,9 @@ public:
         default:
             success = false;
         }
-        write(drv8711::reg_ctrl);
+        if (success) {
+            write(drv8711::reg_ctrl);
+        }
         return success;
     }
 
