@@ -3,6 +3,7 @@ module;
 #include <cstdint>
 
 import stepper_driver;
+import drv8711_config;
 
 export module drv8711;
 export namespace drv8711 {
