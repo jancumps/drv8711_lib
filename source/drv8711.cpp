@@ -8,31 +8,31 @@ export module drv8711;
 export namespace drv8711 {
 
 struct ctrl {
-                            // address 14-12
-    unsigned int dtime;     // 11-10
-    unsigned int isgain;    // 9-8
-    unsigned int exstall;   // 7
-    unsigned int mode;      // 6-3
-    unsigned int rstep;     // 2
-    unsigned int rdir;      // 1
-    unsigned int enbl;      // 0
+    static const unsigned int address = 0x0000; // address 15-12
+    unsigned int dtime;                         // 11-10
+    unsigned int isgain;                        // 9-8
+    unsigned int exstall;                       // 7
+    unsigned int mode;                          // 6-3
+    unsigned int rstep;                         // 2
+    unsigned int rdir;                          // 1
+    unsigned int enbl;                          // 0
     inline operator uint16_t() const {
-        return (0x0000 << 12) | (dtime << 10) | (isgain << 8) |(exstall << 7) | (mode << 3) | (rstep << 2) | (rdir << 1) | (enbl);
+        return (address << 12) | (dtime << 10) | (isgain << 8) |(exstall << 7) | (mode << 3) | (rstep << 2) | (rdir << 1) | (enbl);
     }
 };
  
 struct torque {
-                            // address 14-12
-                            // 11
-    unsigned int simplth;   // 10-8
-    unsigned int torque;    // 7-0
+    static const unsigned int address = 0x0001; // address 15-12
+                                                // 11
+    unsigned int simplth;                       // 10-8
+    unsigned int torque;                        // 7-0
     inline operator uint16_t() const {
-        return (0x0001 << 12) | (simplth << 8) | torque;
+        return (address << 12) | (simplth << 8) | torque;
     }
 };
  
 struct off {
-                            // address 14-12
+                            // address 15-12
                             // 11-9
     unsigned int pwmmode;   // 8
     unsigned int toff;      // 7-0
@@ -42,7 +42,7 @@ struct off {
 };
  
 struct blank {
-                            // address 14-12
+                            // address 15-12
                             // 11-9
     unsigned int abt;       // 8
     unsigned int tblank;    // 7-0
@@ -52,7 +52,7 @@ struct blank {
 };
  
 struct decay {
-                            // address 14-12
+                            // address 15-12
                             // 11
     unsigned int decmod;    // 10-8
     unsigned int tdecay;    // 7-0
@@ -62,7 +62,7 @@ struct decay {
 };
  
 struct stall {
-                            // address 14-12
+                            // address 15-12
     unsigned int vdiv;      // 11-10
     unsigned int sdcnt;     // 9-8
     unsigned int sdthr;     // 7-0
@@ -72,7 +72,7 @@ struct stall {
 };
  
 struct drive {
-                            // address 14-12
+                            // address 15-12
     unsigned int idrivep;   // 11-10
     unsigned int idriven;   // 9-8
     unsigned int tdrivep;   // 7-6
@@ -85,7 +85,7 @@ struct drive {
 };
  
 struct status {
-                            // address 14-12
+                            // address 15-12
                             // 11-8
     unsigned int stdlat;    // 7
     unsigned int std;       // 6
@@ -102,16 +102,17 @@ struct status {
 
 class drv8711_driver : public stepper_driver::stepper_driver {
 public:
-    // changes config register settings
     virtual bool microsteps(unsigned int microsteps) override {
         uint16_t reg = read(0x0000);
-        reg &= 0b11111111111111111111111110000111; // clear microsteps
+        reg &= 0b00001111111111111111111110000111; // clear address (garbage) and microsteps
         uint16_t mode = microsteps_mode(microsteps);
         mode = mode << 3;
         reg |= mode;
+        reg |= (ctrl::address << 12); // address
         write(reg);
         return true;
-        }
+    }
+
 protected:
     virtual unsigned int microsteps_mode(unsigned int microsteps) {
         unsigned int mode = true;
