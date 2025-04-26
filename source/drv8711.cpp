@@ -111,10 +111,10 @@ private:
 
 class wakeup { // driver out of sleep as long as object in scope
 public:    
-    wakeup(driver& driver) : driver_(driver) { driver.enable(true); }
+    wakeup(drv8711_driver& driver) : driver_(driver) { driver.enable(true); }
     ~wakeup() { driver_.enable(false); }
 private:
-    driver& driver_;
+    drv8711_driver& driver_;
 };
 
 
