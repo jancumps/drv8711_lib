@@ -145,6 +145,7 @@ protected:
             mode = 0x0008;
             break;
         default:
+            assert(false); // develop check unsupported microstep
             mode = 0x0000;
         }
         return mode;
