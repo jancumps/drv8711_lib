@@ -3,7 +3,6 @@ module;
 #include <cstdint>
 #include <cassert>
 import stepper_driver;
-import drv8711_config;
 
 export module drv8711;
 export namespace drv8711 {
@@ -153,19 +152,6 @@ protected:
         return mode;
     }
 private:
-    // initialise all registers from the defaults
-    // defined in module drv8711_config
-    // developer can override values before calling
-    void init_registers() {
-        write(drv8711::reg_ctrl);
-        write(drv8711::reg_torque);
-        write(drv8711::reg_off);
-        write(drv8711::reg_blank);
-        write(drv8711::reg_decay);
-        write(drv8711::reg_stall);
-        write(drv8711::reg_drive);
-        write(drv8711::reg_status);
-    }
     virtual void write(uint16_t reg) = 0;
     virtual uint16_t read(uint16_t address) = 0;
     virtual void init_spi() = 0;
