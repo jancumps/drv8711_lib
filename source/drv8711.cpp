@@ -106,6 +106,7 @@ public:
     virtual bool init() override {
         init_gpio();
         init_spi();
+        init_cs();
         init_registers();
         return true;
     }
