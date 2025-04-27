@@ -162,6 +162,7 @@ private:
     virtual void write(uint16_t reg) = 0;
     virtual uint16_t read(uint16_t address) = 0;
     virtual void init_spi() = 0;
+    virtual void init_cs() = 0;
     virtual void init_gpio() = 0;
     virtual void init_registers() = 0;
 };
