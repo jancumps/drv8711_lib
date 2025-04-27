@@ -155,7 +155,7 @@ private:
     // initialise all registers from the defaults
     // defined in module drv8711_config
     // developer can override values before calling
-    void init_registers() override{
+    void init_registers() {
         write(drv8711::reg_ctrl);
         write(drv8711::reg_torque);
         write(drv8711::reg_off);
