@@ -16,7 +16,7 @@ struct ctrl {
     unsigned int rstep;                         // 2
     unsigned int rdir;                          // 1
     unsigned int enbl;                          // 0
-    inline operator uint16_t() const {
+    inline explicit operator uint16_t() const {
         return (address << 12) | (dtime << 10) | (isgain << 8) |(exstall << 7) | (mode << 3) | (rstep << 2) | (rdir << 1) | (enbl);
     }
 };
@@ -26,7 +26,7 @@ struct torque {
                                                 // 11
     unsigned int simplth;                       // 10-8
     unsigned int torque;                        // 7-0
-    inline operator uint16_t() const {
+    inline explicit operator uint16_t() const {
         return (address << 12) | (simplth << 8) | torque;
     }
 };
@@ -36,7 +36,7 @@ struct off {
                             // 11-9
     unsigned int pwmmode;   // 8
     unsigned int toff;      // 7-0
-    inline operator uint16_t() const {
+    inline explicit operator uint16_t() const {
         return (0x0002 << 12) | (pwmmode << 8) | toff;
     }
 };
@@ -46,7 +46,7 @@ struct blank {
                             // 11-9
     unsigned int abt;       // 8
     unsigned int tblank;    // 7-0
-    inline operator uint16_t() const {
+    inline explicit operator uint16_t() const {
         return (0x0003 << 12) | (abt << 8) | tblank;
     }
 };
@@ -56,7 +56,7 @@ struct decay {
                             // 11
     unsigned int decmod;    // 10-8
     unsigned int tdecay;    // 7-0
-    inline operator uint16_t() const {
+    inline explicit operator uint16_t() const {
         return (0x0004 << 12) | (decmod << 8) | tdecay;
     }
 };
@@ -66,7 +66,7 @@ struct stall {
     unsigned int vdiv;      // 11-10
     unsigned int sdcnt;     // 9-8
     unsigned int sdthr;     // 7-0
-    inline operator uint16_t() const {
+    inline explicit operator uint16_t() const {
         return (0x0005 << 12) | (vdiv << 10) | (sdcnt << 8) | sdthr;
     }
 };
@@ -79,7 +79,7 @@ struct drive {
     unsigned int tdriven;   // 5-4
     unsigned int ocpdeg;    // 3-2
     unsigned int ocpth;     // 1-0
-    inline operator uint16_t() const {
+    inline explicit operator uint16_t() const {
         return (0x0006 << 12) | (idrivep << 10) | (idriven << 8) | (tdrivep << 6) | (tdriven << 4) | (ocpdeg << 2) | (ocpth);
     }
 };
@@ -95,7 +95,7 @@ struct status {
     unsigned int bocp;      // 2
     unsigned int aocp;      // 1
     unsigned int ots;       // 0
-    inline operator uint16_t() const {
+    inline explicit operator uint16_t() const {
         return (0x0007 << 12) | (stdlat << 7) | (std << 6) | (uvlo << 5) | (bpdf << 4) | (apdf << 3) | (bocp << 2) | (aocp << 1) | (ots);
     }
 };
