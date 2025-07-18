@@ -7,6 +7,10 @@ import stepper_driver;
 export module drv8711;
 export namespace drv8711 {
 
+// uses implicit conversion operators to uint16_t
+// C++ guidelines acknowledged. In this design it is a valid construct
+// https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c164-avoid-implicit-conversion-operators
+
 struct ctrl {
     static const unsigned int address = 0x0000; // address 15-12
     unsigned int dtime;                         // 11-10
